@@ -63,16 +63,31 @@
             text-transform: uppercase;
             text-decoration: none;
             color: white;
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            border: none;
+            background: linear-gradient(145deg, #ff4b2b, #ff1e56);
             border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s ease;
+            text-align: center;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
         }
 
         .btn:hover {
-            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+            background: linear-gradient(145deg, #ff1e56, #ff4b2b);
             transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Tombol Beranda */
+        .btn-beranda {
+            margin-top: 15px;
+            background: linear-gradient(145deg, #1e90ff, #0072ff);
+        }
+
+        .btn-beranda:hover {
+            background: linear-gradient(145deg, #0072ff, #1e90ff);
         }
     </style>
 </head>
@@ -80,11 +95,14 @@
 
     <div class="container">
         <h1>Jadwal Event JKT48 2025</h1>
-        <a href="https://github.com/beritajkt48/event/maret" class="btn">Jadwal Maret 2025</a>
-        <a href="https://github.com/beritajkt48/event/April" class="btn">Jadwal April 2025</a>
-        <a href="https://github.com/beritajkt48/event/Mei" class="btn">Jadwal Mei 2025</a>
-        <a href="https://github.com/beritajkt48/event/Juni" class="btn">Jadwal Juni 2025</a>
-        <a href="https://github.com/beritajkt48/event/Juli" class="btn">Jadwal Juli 2025</a>
+        <a href="https://beritajkt48.github.io/event/maret/" class="btn">Jadwal Maret 2025</a>
+        <a href="https://beritajkt48.github.io/event/april/" class="btn">Jadwal April 2025</a>
+        <a href="https://beritajkt48.github.io/event/mei/" class="btn">Jadwal Mei 2025</a>
+        <a href="https://beritajkt48.github.io/event/juli/" class="btn">Jadwal Juli 2025</a>
+        <a href="https://beritajkt48.github.io/event/september" class="btn">Jadwal September 2025</a>
+        
+        <!-- Tombol Kembali ke Beranda -->
+        <a href="https://beritajkt48.github.io/info/" class="btn btn-beranda">Kembali ke Beranda</a>
     </div>
 
 </body>
