@@ -3,283 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal Event JKT48 2025</title>
+    <title>JKT48 Event Schedule</title>
     <style>
-        /* Font Google */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-        /* Reset CSS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
-        /*  Updated background with vibrant pink-cyan gradient animation */
         body {
-            background: linear-gradient(-45deg, #ff006e, #00d9ff, #ff006e, #00d9ff);
-            background-size: 400% 400%;
-            animation: gradientBG 8s ease infinite;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            color: white;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            overflow-x: hidden;
             position: relative;
-            overflow: hidden;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /*  Added floating background elements for visual interest */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 0, 110, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: float 20s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Container */
-        .container {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(255, 0, 110, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 450px;
-            position: relative;
-            z-index: 1;
-            animation: slideUp 0.6s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /*  Enhanced title with gradient text */
-        h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #ff006e, #00d9ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.5px;
-        }
-
-        /*  Updated button styles with pink-cyan gradient */
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            margin: 12px 0;
-            font-size: 16px;
-            font-weight: 600;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: white;
-            background: linear-gradient(135deg, #ff006e, #ff4d94);
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 0.5px;
-        }
-
-        /*  Added shine effect on button hover */
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            background: linear-gradient(135deg, #ff4d94, #ff006e);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 0, 110, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 10px rgba(255, 0, 110, 0.3);
-        }
-
-        /*  Updated beranda button with cyan gradient */
-        .btn-beranda {
-            margin-top: 20px;
-            background: linear-gradient(135deg, #00d9ff, #00a8cc);
-            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
-        }
-
-        .btn-beranda:hover {
-            background: linear-gradient(135deg, #00a8cc, #00d9ff);
-            box-shadow: 0 6px 20px rgba(0, 217, 255, 0.4);
-        }
-
-        /* Pop-up Iklan */
-        .popup-container {
-            display: none;
+        /* Animated Stars Background */
+        .stars-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeIn 0.3s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) translateX(0px); }
+            100% { transform: translateY(-100vh) translateX(20px); }
+        }
+
+        .star-moving {
+            animation: twinkle 3s infinite, float 20s linear infinite;
+        }
+
+        /* Main Content */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            color: #999;
+            font-size: 1rem;
+            font-weight: 300;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .popup-content {
-            position: relative;
+        /* Main Wrapper */
+        .schedule-wrapper {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Month Selector */
+        .month-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .month-selector h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        .month-btn {
+            padding: 12px 16px;
+            border: 2px solid #333;
             background: transparent;
-            padding: 0;
-            border-radius: 15px;
-            text-align: center;
-            max-width: 90%;
-            width: 320px;
-            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes popIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .popup-content img {
-            width: 100%;
-            border-radius: 15px;
-            display: block;
-            box-shadow: 0 10px 40px rgba(255, 0, 110, 0.3);
-        }
-
-        /*  Enhanced close button with gradient background */
-        .close-btn {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(135deg, #ff006e, #00d9ff);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            color: #f0f0f0;
             cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .month-btn:hover {
+            border-color: #f0f0f0;
+            background: rgba(240, 240, 240, 0.05);
+        }
+
+        .month-btn.active {
+            background: #f0f0f0;
+            color: #0a0a0a;
+            border-color: #f0f0f0;
+        }
+
+        /* Event List */
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .event-list h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        .event-item {
+            background: rgba(50, 50, 50, 0.5);
+            border-left: 4px solid #666;
+            padding: 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event-item:hover {
+            background: rgba(80, 80, 80, 0.7);
+            border-left-color: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .event-date {
+            font-size: 0.85rem;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .event-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .event-location {
+            font-size: 0.9rem;
+            color: #bbb;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
+            gap: 5px;
         }
 
-        .close-btn:hover {
-            transform: rotate(90deg) scale(1.1);
-            box-shadow: 0 6px 20px rgba(255, 0, 110, 0.4);
+        .event-location::before {
+            content: "📍";
         }
 
-        /* Responsif untuk layar lebih besar */
-        @media (min-width: 768px) {
-            .popup-content {
-                width: 400px;
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
             }
 
-            h1 {
-                font-size: 32px;
+            .schedule-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
 
+            .month-selector {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .month-selector h2 {
+                width: 100%;
+            }
+
+            .month-btn {
+                flex: 1;
+                min-width: calc(50% - 5px);
+            }
+
+            .event-list h2 {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .container {
-                padding: 50px 40px;
+                padding: 20px 16px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .event-title {
+                font-size: 1rem;
+            }
+
+            .month-btn {
+                min-width: calc(50% - 5px);
             }
         }
     </style>
 </head>
-
 <body>
-    <!-- Pop-up Iklan -->
-    <div class="popup-container" id="popup">
-        <div class="popup-content">
-            <span class="close-btn" onclick="closePopup()">×</span>
-            <a href="https://s.shopee.co.id/AUg4dsQtYw" target="_blank">
-                <img src="iklan.png" alt="Iklan JKT48">
-            </a>
+    <!-- Stars Background -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>JKT48</h1>
+            <p>Event Schedule 2025</p>
+        </div>
+
+        <div class="schedule-wrapper">
+            <!-- Month Selector -->
+            <div class="month-selector" id="monthSelector"></div>
+
+            <!-- Event List -->
+            <div class="event-list">
+                <h2 id="eventMonthTitle">Pilih Bulan</h2>
+                <div id="eventContainer"></div>
+            </div>
         </div>
     </div>
 
-    <div class="container">
-        <h1>Jadwal Event JKT48 2025</h1>
-        <a href="https://beritajkt48.github.io/event/september" class="btn">September 2025</a>
-        <a href="https://beritajkt48.github.io/event/oktober" class="btn">Oktober 2025</a>
-        <a href="https://beritajkt48.github.io/event/november" class="btn">November 2025</a>
-        
-        <!-- Tombol Kembali ke Beranda -->
-        <a href="https://beritajkt48.github.io/info/" class="btn btn-beranda">Kembali ke Beranda</a>
-    </div>
-
     <script>
-        // Tampilkan pop-up setelah 1 detik (1000ms)
-        setTimeout(function() {
-            document.getElementById("popup").style.display = "flex";
-        }, 1000);
+        // Sample Event Data
+        const eventData = {
+            'januari': [
+                { date: '2025-01-05', title: 'Theater Performance', location: 'JKT48 Theater' },
+                { date: '2025-01-12', title: 'Fan Meeting', location: 'Jakarta Convention Center' },
+                { date: '2025-01-25', title: 'Concert Show', location: 'Gelora Bung Karno' }
+            ],
+            'februari': [
+                { date: '2025-02-08', title: 'Theater Performance', location: 'JKT48 Theater' },
+                { date: '2025-02-14', title: 'Valentine Special Event', location: 'Senayan City' },
+                { date: '2025-02-28', title: 'Concert Show', location: 'Gelora Bung Karno' }
+            ],
+            'maret': [
+                { date: '2025-03-10', title: 'Theater Performance', location: 'JKT48 Theater' },
+                { date: '2025-03-20', title: 'Fan Meeting', location: 'Jakarta Convention Center' }
+            ],
+            'april': [
+                { date: '2025-04-05', title: 'Concert Show', location: 'Gelora Bung Karno' },
+                { date: '2025-04-15', title: 'Theater Performance', location: 'JKT48 Theater' }
+            ],
+            'mei': [
+                { date: '2025-05-10', title: 'Theater Performance', location: 'JKT48 Theater' },
+                { date: '2025-05-22', title: 'Fan Meeting', location: 'Jakarta Convention Center' }
+            ],
+            'juni': [
+                { date: '2025-06-08', title: 'Summer Concert', location: 'Gelora Bung Karno' },
+                { date: '2025-06-19', title: 'Theater Performance', location: 'JKT48 Theater' }
+            ],
+            'juli': [
+                { date: '2025-07-12', title: 'Theater Performance', location: 'JKT48 Theater' },
+                { date: '2025-07-26', title: 'Concert Show', location: 'Gelora Bung Karno' }
+            ],
+            'agustus': [
+                { date: '2025-08-05', title: 'Independence Day Special', location: 'Jakarta Convention Center' },
+                { date: '2025-08-17', title: 'Theater Performance', location: 'JKT48 Theater' }
+            ],
+            'september': [
+                { date: '2025-09-10', title: 'Theater Performance', location: 'JKT48 Theater' },
+                { date: '2025-09-21', title: 'Fan Meeting', location: 'Jakarta Convention Center' }
+            ],
+            'oktober': [
+                { date: '2025-10-08', title: 'Halloween Special', location: 'Gelora Bung Karno' },
+                { date: '2025-10-25', title: 'Theater Performance', location: 'JKT48 Theater' }
+            ],
+            'november': [
+                { date: '2025-11-12', title: 'Theater Performance', location: 'JKT48 Theater' },
+                { date: '2025-11-28', title: 'Year-End Concert', location: 'Jakarta Convention Center' }
+            ],
+            'desember': [
+                { date: '2025-12-10', title: 'Theater Performance', location: 'JKT48 Theater' },
+                { date: '2025-12-25', title: 'Christmas Special', location: 'Gelora Bung Karno' }
+            ]
+        };
 
-        // Fungsi untuk menutup pop-up
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
+        const months = Object.keys(eventData);
+        const monthSelector = document.getElementById('monthSelector');
+        const eventContainer = document.getElementById('eventContainer');
+        const eventMonthTitle = document.getElementById('eventMonthTitle');
+
+        // Initialize Month Buttons
+        function initializeMonths() {
+            const title = document.createElement('h2');
+            title.textContent = 'Bulan';
+            monthSelector.appendChild(title);
+
+            months.forEach(month => {
+                const btn = document.createElement('button');
+                btn.className = 'month-btn';
+                btn.textContent = month.charAt(0).toUpperCase() + month.slice(1);
+                btn.dataset.month = month;
+
+                btn.addEventListener('click', () => selectMonth(month, btn));
+
+                monthSelector.appendChild(btn);
+            });
         }
+
+        // Select Month and Display Events
+        function selectMonth(month, btnElement) {
+            // Update active button
+            document.querySelectorAll('.month-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            btnElement.classList.add('active');
+
+            // Update events
+            const events = eventData[month];
+            eventMonthTitle.textContent = 'Jadwal ' + month.charAt(0).toUpperCase() + month.slice(1);
+            eventContainer.innerHTML = '';
+
+            if (events && events.length > 0) {
+                events.forEach(event => {
+                    const eventEl = document.createElement('div');
+                    eventEl.className = 'event-item';
+                    eventEl.innerHTML = `
+                        <div class="event-date">${formatDate(event.date)}</div>
+                        <div class="event-title">${event.title}</div>
+                        <div class="event-location">${event.location}</div>
+                    `;
+                    eventContainer.appendChild(eventEl);
+                });
+            } else {
+                eventContainer.innerHTML = '<div class="empty-state"><p>Tidak ada jadwal untuk bulan ini</p></div>';
+            }
+        }
+
+        // Format Date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                weekday: 'short',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Generate Random Stars
+        function generateStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            const starCount = window.innerWidth > 768 ? 100 : 50;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2 + 1;
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const duration = Math.random() * 3 + 2;
+                const delay = Math.random() * 5;
+
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = x + '%';
+                star.style.top = y + '%';
+                star.style.animationDuration = duration + 's';
+                star.style.animationDelay = delay + 's';
+
+                // Add moving animation to some stars
+                if (Math.random() > 0.7) {
+                    star.classList.add('star-moving');
+                    star.style.animationDelay = delay + 's, ' + (Math.random() * 10) + 's';
+                }
+
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            generateStars();
+            initializeMonths();
+            // Set first month as default
+            const firstBtn = document.querySelector('[data-month="januari"]');
+            if (firstBtn) selectMonth('januari', firstBtn);
+        });
+
+        // Regenerate stars on resize
+        window.addEventListener('resize', () => {
+            const starsContainer = document.getElementById('starsContainer');
+            starsContainer.innerHTML = '';
+            generateStars();
+        });
     </script>
 </body>
 </html>
