@@ -186,10 +186,103 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            margin-bottom: 10px;
         }
 
         .event-location::before {
             content: "📍";
+        }
+
+        /* Event Tags */
+        .event-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .event-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-jakarta {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .tag-luar-kota {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        .tag-gagal {
+            background: #95a5a6;
+            color: white;
+        }
+
+        /* Event Statistics */
+        .event-stats {
+            background: rgba(50, 50, 50, 0.5);
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .event-stats h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .stat-item {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+            border-left: 3px solid #666;
+        }
+
+        .stat-item.total {
+            border-left-color: #f0f0f0;
+        }
+
+        .stat-item.jakarta {
+            border-left-color: #ff6b6b;
+        }
+
+        .stat-item.luar-kota {
+            border-left-color: #4ecdc4;
+        }
+
+        .stat-item.gagal {
+            border-left-color: #95a5a6;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .empty-state {
@@ -232,6 +325,10 @@
             .event-list h2 {
                 margin-top: 20px;
             }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 480px) {
@@ -249,6 +346,10 @@
 
             .month-btn {
                 min-width: calc(50% - 5px);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -272,66 +373,130 @@
             <div class="event-list">
                 <h2 id="eventMonthTitle">Pilih Bulan</h2>
                 <div id="eventContainer"></div>
+                <!-- Add statistics section -->
+                <div id="statsContainer"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Sample Event Data
         const eventData = {
             'januari': [
-                { date: '2026-01-08', title: 'Pertaruhan Cinta', location: 'JKT48 Theater & IDN Live' },
-                { date: '2026-01-09', title: 'Cara Meminum Ramune', location: 'JKT48 Theater & IDN Live' },
-                { date: '2026-01-10', title: 'Sambil Menggandeng Erat Tanganku', location: 'JKT48 Theater & IDN Live' },
-                { date: '2026-01-11', title: 'Cara Meminum Ramune', location: 'JKT48 Theater & IDN Live' },
-                { date: '2026-01-15', title: 'Cara Meminum Ramune', location: 'JKT48 Theater & IDN Live' },
-                { date: '2026-01-16', title: 'Sambil Menggandeng Erat Tanganku', location: 'JKT48 Theater & IDN Livea' },
-                { date: '2026-01-17', title: 'Cara Meminum Ramune', location: 'JKT48 Theater & IDN Live' },
-                { date: '2026-01-18', title: 'Sambil Menggandeng Erat Tanganku', location: 'JKT48 Theater & IDN Live' },
-                { date: '2026-01-18', title: 'Pertaruhan Cinta', location: 'JKT48 Theater & IDN Live' }
+                { date: '2026-01-08', title: 'Pertaruhan Cinta', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] },
+                { date: '2026-01-09', title: 'Cara Meminum Ramune', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] },
+                { date: '2026-01-10', title: 'Sambil Menggandeng Erat Tanganku', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] },
+                { date: '2026-01-11', title: 'Cara Meminum Ramune', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] },
+                { date: '2026-01-15', title: 'Cara Meminum Ramune', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] },
+                { date: '2026-01-16', title: 'Sambil Menggandeng Erat Tanganku', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] },
+                { date: '2026-01-17', title: 'Cara Meminum Ramune', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] },
+                { date: '2026-01-18', title: 'Sambil Menggandeng Erat Tanganku', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] },
+                { date: '2026-01-18', title: 'Pertaruhan Cinta', location: 'JKT48 Theater & IDN Live', tags: ['jakarta'] }
             ],
             'februari': [
-                { date: '2026-02-07', title: 'AIEROFEST 2026', location: 'Uptown Park, Summarecon Mall Serpong' },
-                { date: '2026-02-07', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
+                { date: '2026-02-07', title: 'AIEROFEST 2026', location: 'Uptown Park, Summarecon Mall Serpong', tags: ['luar-kota'] }
             ],
             'maret': [
-                { date: '2026-12-01', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
-            ],
-            'april': [
-                { date: '2026-12-01', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
-            ],
-            'mei': [
-                { date: '2026-12-01', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
-            ],
-            'juni': [
-                { date: '2026-12-01', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
-            ],
-            'juli': [
-                { date: '2026-12-01', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
-            ],
-            'agustus': [
-                { date: '2026-12-01', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
-            ],
-            'september': [
-                { date: '2026-12-01', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
-            ],
-            'oktober': [
-                { date: '2026-12-01', title: 'Data tidak tersedia', location: 'Data tidak tersedia' }
-            ],
-            'november': [
-                { date: '2026-12-01', title: 'Theater Performance', location: 'JKT48 Theater' },
-                { date: '2026-12-01', title: 'Year-End Concert', location: 'Jakarta Convention Center' }
-            ],
-            'desember': [
-                { date: '2026-12-01', title: 'Theater Performance', location: 'JKT48 Theater' },
-                { date: '2026-12-01', title: 'Christmas Special', location: 'Gelora Bung Karno' }
-            ]
+    { date: '2026-03-20', title: 'none', location: 'none', tags: ['luar-kota'] }
+],
+'april': [
+    { date: '2026-04-25', title: 'none', location: 'none', tags: ['gagal'] }
+],
+'mei': [
+    { date: '2026-05-01', title: 'none', location: 'none', tags: ['gagal'] }
+],
+'juni': [
+    { date: '2026-06-20', title: 'none', location: 'none', tags: ['luar-kota'] }
+],
+'juli': [
+    { date: '2026-07-08', title: 'none', location: 'none', tags: ['gagal'] }
+],
+'agustus': [
+    { date: '2026-08-22', title: 'none', location: 'none', tags: ['luar-kota'] }
+],
+'september': [
+    { date: '2026-09-12', title: 'none', location: 'none', tags: ['jakarta'] }
+],
+'oktober': [
+    { date: '2026-10-18', title: 'none', location: 'none', tags: ['gagal'] }
+],
+'november': [
+    { date: '2026-11-25', title: 'none', location: 'none', tags: ['luar-kota'] }
+],
+'desember': [
+    { date: '2026-12-20', title: 'none', location: 'none', tags: ['luar-kota'] }
+]
         };
 
         const months = Object.keys(eventData);
         const monthSelector = document.getElementById('monthSelector');
         const eventContainer = document.getElementById('eventContainer');
         const eventMonthTitle = document.getElementById('eventMonthTitle');
+        const statsContainer = document.getElementById('statsContainer');
+
+        function getTagClass(tag) {
+            switch(tag) {
+                case 'jakarta': return 'tag-jakarta';
+                case 'luar-kota': return 'tag-luar-kota';
+                case 'gagal': return 'tag-gagal';
+                default: return '';
+            }
+        }
+
+        function getTagLabel(tag) {
+            switch(tag) {
+                case 'jakarta': return 'Jakarta';
+                case 'luar-kota': return 'Luar Kota';
+                case 'gagal': return 'Gagal';
+                default: return tag;
+            }
+        }
+
+        function calculateStats(events) {
+            const stats = {
+                total: events.length,
+                jakarta: 0,
+                'luar-kota': 0,
+                gagal: 0
+            };
+
+            events.forEach(event => {
+                if (event.tags) {
+                    event.tags.forEach(tag => {
+                        if (stats.hasOwnProperty(tag)) {
+                            stats[tag]++;
+                        }
+                    });
+                }
+            });
+
+            return stats;
+        }
+
+        function renderStats(stats) {
+            statsContainer.innerHTML = `
+                <div class="event-stats">
+                    <h3>Statistik Bulan</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item total">
+                            <div class="stat-value">${stats.total}</div>
+                            <div class="stat-label">Total Event</div>
+                        </div>
+                        <div class="stat-item jakarta">
+                            <div class="stat-value">${stats.jakarta}</div>
+                            <div class="stat-label">Jakarta</div>
+                        </div>
+                        <div class="stat-item luar-kota">
+                            <div class="stat-value">${stats['luar-kota']}</div>
+                            <div class="stat-label">Luar Kota</div>
+                        </div>
+                        <div class="stat-item gagal">
+                            <div class="stat-value">${stats.gagal}</div>
+                            <div class="stat-label">Gagal</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
         // Initialize Month Buttons
         function initializeMonths() {
@@ -368,15 +533,30 @@
                 events.forEach(event => {
                     const eventEl = document.createElement('div');
                     eventEl.className = 'event-item';
+                    
+                    let tagsHTML = '';
+                    if (event.tags && event.tags.length > 0) {
+                        tagsHTML = `
+                            <div class="event-tags">
+                                ${event.tags.map(tag => `<span class="event-tag ${getTagClass(tag)}">${getTagLabel(tag)}</span>`).join('')}
+                            </div>
+                        `;
+                    }
+
                     eventEl.innerHTML = `
                         <div class="event-date">${formatDate(event.date)}</div>
                         <div class="event-title">${event.title}</div>
                         <div class="event-location">${event.location}</div>
+                        ${tagsHTML}
                     `;
                     eventContainer.appendChild(eventEl);
                 });
+
+                const stats = calculateStats(events);
+                renderStats(stats);
             } else {
                 eventContainer.innerHTML = '<div class="empty-state"><p>Tidak ada jadwal untuk bulan ini</p></div>';
+                statsContainer.innerHTML = '';
             }
         }
 
